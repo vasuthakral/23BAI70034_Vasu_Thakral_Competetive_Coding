@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int minimumSize(vector<int>& nums, int maxOperations) {
+        int n = nums.size();
+        int s = 1;
+        int e = *max_element(nums.begin(), nums.end());
+        while (s <= e) {
+            int mid = s + (e - s) / 2;
+            long long op = 0;
+            for (int i = 0; i < n; i++) {
+                op += (nums[i] - 1) / mid;
+            }  
+            if (op <= maxOperations)
+                e = mid-1;
+            else
+                s = mid + 1;
+        }
+        return s;
+    }
+};
